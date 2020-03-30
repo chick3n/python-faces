@@ -1,0 +1,27 @@
+appName: Faces
+logLevel: DEBUG
+debug: False
+ffmpegPath: 'C:\Program Files\ffmpeg\ffmpeg.exe'
+
+photos:
+  template: 'C:\Users\username\Downloads\faces\20200229_075456.jpg'
+  skip: True
+  sync: 'google'
+  googleCredentials: './google_credentials.json'
+  albumId: 'google photos album id'
+  path: 'C:\Users\username\Downloads\faces'
+  output: 'C:\Users\username\Downloads\faces\output'
+  overwrite: True
+  skipManualSelect: False
+  border:
+    width: 30
+    height: 0
+    blur: True
+    color: '#F497B8'
+
+video:
+  width: 300
+  height: 500
+  framerate: 8
+  codec: 'libx264'
+  output: 'C:\Users\username\Downloads\faces\output'
