@@ -85,7 +85,8 @@ class GooglePhotos(SyncInterface):
         """
         download items
         """
-        if not Path(self.sync_path).exists():
+        psync_path = Path(self.sync_path)
+        if not psync_path.exists():
             self.logger.error('Output path %s does not exists.', self.sync_path)
             return []
 
@@ -94,13 +95,13 @@ class GooglePhotos(SyncInterface):
             if 'image' in image_info['mimeType']:
                 url = image_info['baseUrl'] + "=d"
                 filename = image_info['filename']
-                fullpath = Path(self.sync_path).joinpath(filename)
+                fullpath = psync_path.joinpath(filename)
                 if fullpath.exists():
                     self.logger.info('File %s already exists, skiping.', filename)
                     continue
                 download(url, str(fullpath))
                 photos.append(str(fullpath))
-                self.logger.info('Download Item %s', filename)
+                self.logger.info('Downloaded Item %s', filename)
 
         return photos
 
