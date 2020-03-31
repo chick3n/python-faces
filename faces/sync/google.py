@@ -94,9 +94,12 @@ class GooglePhotos(SyncInterface):
             if 'image' in image_info['mimeType']:
                 url = image_info['baseUrl'] + "=d"
                 filename = image_info['filename']
-                fullpath = str(Path(self.sync_path).joinpath(filename))
-                download(url, fullpath)
-                photos.append(fullpath)
+                fullpath = Path(self.sync_path).joinpath(filename)
+                if fullpath.exists():
+                    self.logger.info('File %s already exists, skiping.', filename)
+                    continue
+                download(url, str(fullpath))
+                photos.append(str(fullpath))
                 self.logger.info('Download Item %s', filename)
 
         return photos
